@@ -58,7 +58,7 @@ export class NewGroupPanelComponent {
     this.nameError.set(null);
     this.descriptionError.set(null);
 
-    if (!this.newGroup.division) {
+    if (!this.newGroup.tenant) {
       this.divisionError.set('Bitte wähle ein Bereich aus.')
     }
     if (!this.newGroup.name) {

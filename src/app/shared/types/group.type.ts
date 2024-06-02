@@ -8,7 +8,7 @@ export type Group = {
   description: string;
   color: string;
   icon: string;
-  division: Tenant | string;
+  tenant: Tenant | string;
   owners: User[];
   members: User[];
   channels: string[];
