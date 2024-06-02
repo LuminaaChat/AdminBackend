@@ -1,0 +1,153 @@
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true" *ngIf="showNewUserPanel">
+  <!-- Background backdrop, show/hide based on slide-over state. -->
+  <div class="fixed inset-0"></div>
+
+  <div class="fixed inset-0 overflow-hidden bg-gray-500 bg-opacity-75 transition-opacity">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+        <!--
+          Slide-over panel, show/hide based on slide-over state.
+
+          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-full"
+            To: "translate-x-0"
+          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-0"
+            To: "translate-x-full"
+        -->
+        <div class="pointer-events-auto w-screen max-w-md mt-16">
+          <form class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+            <div class="h-0 flex-1 overflow-y-auto">
+              <div class="bg-lc-petrol-light px-4 py-6 sm:px-6">
+                <div class="flex items-center justify-between">
+                  <h2 class="text-base font-semibold leading-6 text-white" id="slide-over-title">Benutzer anlegen</h2>
+                  <div class="ml-3 flex h-7 items-center">
+                    <button type="button" class="relative rounded-md bg-lc-petrol-light text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white" (click)="onClickClose()">
+                      <span class="absolute -inset-2.5"></span>
+                      <span class="sr-only">Close panel</span>
+                      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="mt-1">
+                  <p class="text-sm text-gray-500">Get started by filling in the information below to create your new user.</p>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col justify-between">
+                <div class="divide-y divide-gray-200 px-4 sm:px-6">
+                  <div class="space-y-6 pb-5 pt-6">
+                    <label class="form-control">
+                      <div class="label">
+                        <span class="label-text">Vorname</span>
+                      </div>
+                      <input type="text" [(ngModel)]="newUser.firstName" name="firstName" placeholder="John" class="input input-bordered input-sm" />
+                      <div class="label">
+                        <span class="label-text-alt"></span>
+                        <span class="label-text-alt" *ngIf="error() != null">{{ error() }}</span>
+                      </div>
+                    </label>
+
+                    <label class="form-control">
+                      <div class="label">
+                        <span class="label-text">Nachname</span>
+                      </div>
+                      <input type="text" [(ngModel)]="newUser.lastName" name="lastName" placeholder="Doe" class="input input-bordered input-sm" />
+                      <div class="label">
+                        <span class="label-text-alt"></span>
+                        <span class="label-text-alt" *ngIf="error() != null">{{ error() }}</span>
+                      </div>
+                    </label>
+
+                    <label class="form-control">
+                      <div class="label">
+                        <span class="label-text">Email</span>
+                      </div>
+                      <input type="text" [(ngModel)]="newUser.email" name="email" placeholder="john@luminaa.chat" class="input input-bordered input-sm" />
+                      <div class="label">
+                        <span class="label-text-alt"></span>
+                        <span class="label-text-alt" *ngIf="error() != null">{{ error() }}</span>
+                      </div>
+                    </label>
+
+                    <label class="form-control">
+                      <div class="label">
+                        <span class="label-text">Passwort</span>
+                      </div>
+                      <input type="password" [(ngModel)]="newUser.password" name="password" placeholder="" class="input input-bordered input-sm" />
+                      <div class="label">
+                        <span class="label-text-alt"></span>
+                        <span class="label-text-alt" *ngIf="error() != null">{{ error() }}</span>
+                      </div>
+                    </label>
+                  </div>
+
+                  <fieldset>
+                    <legend class="sr-only">Notifications</legend>
+                    <div class="space-y-5 mt-2">
+                      <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input [(ngModel)]="activeRoles.client" value="CLIENT" id="client" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="client" class="font-medium text-gray-900">Klient</label>
+                          <p id="client-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input [(ngModel)]="activeRoles.legalGuardian" value="LEGALGUARDIAN" id="legal-guardian" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="legal-guardian" class="font-medium text-gray-900">Sorgeberechtigter</label>
+                          <p id="legal-guardian-description" class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input [(ngModel)]="activeRoles.employee" id="employee" aria-describedby="candidates-description" name="candidates" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="employee" class="font-medium text-gray-900">Mitarbeiter</label>
+                          <p id="employee-description" class="text-gray-500">Get notified when a candidate applies for a job.</p>
+                        </div>
+                      </div>
+                      <div class="relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input [(ngModel)]="activeRoles.admin" id="admin" aria-describedby="offers-description" name="offers" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary">
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="admin" class="font-medium text-gray-900">Administrator</label>
+                          <p id="offers-description" class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-shrink-0 justify-end px-4 py-4 space-x-3">
+              <button type="button" class="btn btn-sm btn-error btn-outline" (click)="onClickClose()">Abbrechen</button>
+              <button type="button" class="btn btn-sm btn-primary" (click)="onClickSave()">Benutzer anlegen</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

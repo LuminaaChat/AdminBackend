@@ -1,0 +1,39 @@
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<!--
+  This example requires updating your template:
+
+  ```
+  <html class="h-full bg-white">
+  <body class="h-full">
+  ```
+-->
+<div>
+  <app-navigation [sidebar]="sidebar" (closeSidebar)="toggleSidebar()"></app-navigation>
+
+  <div class="lg:pl-72">
+    <app-head-bar (openSidebar)="toggleSidebar()"></app-head-bar>
+
+    <main class="py-10">
+      <div class="px-4 sm:px-6 lg:px-8">
+
+        <router-outlet></router-outlet>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<app-notifications></app-notifications>

@@ -1,0 +1,8 @@
+<div class="toast toast-end">
+  @for(notify of notifyService.getNotifications()(); track $index) {
+    <div class="alert alert-{{notify.type}} flex-col">
+      <h2 class="flex-none font-bold">{{notify.title}}</h2> <br>
+      <span class="flex-grow">{{notify.message}}</span>
+    </div>
+  }
+</div>

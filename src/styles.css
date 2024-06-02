@@ -1,0 +1,89 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 200;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-ExtraLight.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: italic;
+  font-weight: 200;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-ExtraLightItalic.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 300;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Light.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: italic;
+  font-weight: 300;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: italic;
+  font-weight: 600;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-SemiBoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: italic;
+  font-weight: 700;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'TitilliumWeb';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./assets/fonts/Titillium_Web/TitilliumWeb-Black.ttf');
+}

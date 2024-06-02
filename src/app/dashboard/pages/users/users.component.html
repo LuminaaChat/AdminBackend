@@ -1,0 +1,123 @@
+<div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
+  <div class="px-4 py-5 sm:px-6">
+    <!-- Content goes here -->
+    <!-- We use less vertical padding on card headers on desktop than on body sections -->
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol role="list" class="flex items-center space-x-4">
+        <li>
+          <div>
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+              <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd" />
+              </svg>
+              <span class="sr-only">Home</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="h-5 w-5 flex-shrink-0 text-gray-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+            </svg>
+            <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Benutzer</a>
+          </div>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="h-5 w-5 flex-shrink-0 text-gray-300" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+            </svg>
+            <a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700" aria-current="page">Übersicht</a>
+          </div>
+        </li>
+      </ol>
+    </nav>
+
+
+  </div>
+  <div class="px-4 py-5 sm:p-6">
+    <!-- Content goes here -->
+
+    <div class="px-4 sm:px-6 lg:px-8">
+      <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+          <h1 class="text-3xl font-semibold leading-6 text-gray-900">Benutzer</h1>
+          <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+        </div>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <button type="button" class="btn btn-primary" (click)="onClickAddUser()">
+            Benutzer anlegen
+          </button>
+        </div>
+      </div>
+      <div class="-mx-4 mt-8 sm:-mx-0">
+        <table class="min-w-full divide-y divide-gray-300">
+          <thead>
+          <tr>
+            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">Letzter Login</th>
+            <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Email</th>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rolle</th>
+            <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0">
+              <span class="sr-only">Edit</span>
+            </th>
+          </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 bg-white">
+
+            @for (user of users(); track $index) {
+              <tr>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{user.firstName}} {{user.lastName}}</td>
+                <td class="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 sm:table-cell">
+                  @if(user.lastLoginAt) {
+                    {{user.lastLoginAt | date: 'dd.MM.yyyy HH:mm'}} Uhr
+                  } @else {
+                    Kein Login
+                  }
+                </td>
+                <td class="hidden whitespace-nowrap px-3 py-4 text-sm text-gray-500 lg:table-cell">{{user.email}}</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{user.roles | rolesArray}}</td>
+                <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                  @if(user._id == appStore.getUserId()) {
+                    <button class="btn btn-sm btn-primary" (click)="onClickEditUser(user)">
+                      Bearbeiten<span class="sr-only">, {{user.firstName}} {{user.lastName}}</span>
+                    </button>
+                  } @else {
+                    <div class="join">
+                      <button class="btn btn-sm btn-error btn-outline join-item" (click)="onClickDeleteUser(user)">
+                        Löschen<span class="sr-only">, {{user.firstName}} {{user.lastName}}</span>
+                      </button>
+                      <button class="btn btn-sm btn-primary  join-item" (click)="onClickEditUser(user)">
+                        Bearbeiten<span class="sr-only">, {{user.firstName}} {{user.lastName}}</span>
+                      </button>
+                    </div>
+                  }
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-0">
+                  Es wurden keine Benutzer gefunden...
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <div class="px-4 py-4 sm:px-6">
+    <!-- Content goes here -->
+    <!-- We use less vertical padding on card footers at all sizes than on headers or body sections -->
+    <app-components-pagination></app-components-pagination>
+  </div>
+</div>
+
+
+<!-- Panel / Modal -->
+<app-new-user-panel [showNewUserPanel]="showNewUserPanel" (closeNewUserPanelEvent)="onClickCloseNewUserPanel($event)"></app-new-user-panel>
+<app-edit-user-panel [selectedUser]="selectedUser()!" [showEditUserPanel]="showEditUserPanel" (closeEditUserPanelEvent)="onClickCloseEditUserPanel($event)"></app-edit-user-panel>
+<app-delete-user-modal [selectedUser]="selectedUser()!" [showDeleteUserModal]="showDeleteUserModal" (closeDeleteUserModal)="onClickCloseDeleteUserModal($event)"></app-delete-user-modal>
+
+
