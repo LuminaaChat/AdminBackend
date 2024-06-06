@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, signal, WritableSignal} from '@angular/core';
-import {NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import { Tenant } from '../../../../../shared/types/tenant.type';
 import {FormsModule} from "@angular/forms";
 
@@ -8,7 +8,8 @@ import {FormsModule} from "@angular/forms";
   standalone: true,
   imports: [
     NgIf,
-    FormsModule
+    FormsModule,
+    NgClass
   ],
   templateUrl: './edit-tenant-panel.component.html',
   styleUrl: './edit-tenant-panel.component.css'

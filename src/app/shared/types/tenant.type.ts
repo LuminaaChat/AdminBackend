@@ -7,7 +7,6 @@ export type Tenant = {
   icon: string;
   owners: string[];
   members: string[];
-  groups: string[];
   minRole: string;
   visible: boolean;
   createdAt: string;
